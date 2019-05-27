@@ -13,9 +13,9 @@ join pccob c on
 join pcusuari d on
     d.codusur = a.codusur
 where a.dtpag between  '01/03/2019' and '31/03/2019'
-    and a.codfilial = '1'
     and a.codcob not in ('BNF', 'CRED')
     --and a.duplic in (24595, 24597, 24600)
+    and a.codfilial = '1'
     and a.codusur = 22
 order by a.codfilial, a.dtpag
 ;
