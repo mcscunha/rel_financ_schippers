@@ -30,3 +30,4 @@ order by
   codfilial,
   dtmov
 ;
+-- Envio com sucesso
