@@ -32,16 +32,5 @@ where
   and a.codusur = 22
 order by
   a.codfilial,
-  a.dtpag;
-select
-  *
-from
-  pcclient;
-select
-  *
-from
-  pccob;
-select
-  *
-from
-  pcusuari;
+  a.dtpag
+;

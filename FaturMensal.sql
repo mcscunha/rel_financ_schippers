@@ -23,8 +23,10 @@ where
   and pcnfsaid.numnota = pcmov.numnota
   and pcnfsaid.condvenda in (1, 5)
   and pcnfsaid.codfilial in ('1')
-  and to_date(pcnfsaid.dtfat, 'DD-MM-YY') between to_date('01/05/2019', 'DD/MM/YYYY')
-  and to_date('31/05/2019', 'DD/MM/YYYY')
+  and to_date(pcnfsaid.dtfat, 'DD-MM-YY') between 
+	to_date('01/05/2019', 'DD/MM/YYYY') and 
+	to_date('31/05/2019', 'DD/MM/YYYY')
 order by
   codfilial,
-  dtmov;
+  dtmov
+;

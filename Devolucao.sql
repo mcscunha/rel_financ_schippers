@@ -1,3 +1,4 @@
+-- Valores consolidados
 select
   'RESUMO_FATURA_AVULSA',
   codfilial,
@@ -17,9 +18,10 @@ from
   VIEW_DEVOL_RESUMO_FATURAVULSA
 where
   codfilial = '1'
-  and dtent between '01/03/2019'
-  and '31/03/2019'
+  and dtent between '01/03/2019' and '31/03/2019'
+
 union all
+
 select
   'RESUMO_FATURAMENTO',
   codfilial,
@@ -40,5 +42,5 @@ from
 where
   CONDVENDA NOT IN (4, 8, 10, 13, 20, 98, 99)
   and codfilial = '1'
-  and dtent between '01/03/2019'
-  and '31/03/2019';
+  and dtent between '01/03/2019' and '31/03/2019'
+;
