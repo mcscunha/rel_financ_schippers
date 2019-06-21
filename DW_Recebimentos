@@ -1,0 +1,96 @@
+create schema recebimentos;  
+go;  
+  
+create table recebimentos.bonificacao (
+    numtransitem int not null,
+    seqmov int not null,
+    codfilial int,
+    dtfat datetime,
+    dtlancto datetime,
+    dtsaida datetime,
+    codusur int,
+    nomeusur varchar(100),
+    codplpag int,
+    descplanpag varchar(100),
+    uf varchar(4),
+    cliente varchar(100),
+    descprod varchar(200),
+    unidade varchar(10),
+    tipomercdepto varchar(10),
+    embalagem varchar(20),
+    qt numeric(10, 4),
+    custofornec money,
+    constraint bonificacao_pk primary key (numtransitem, seqmov)
+);
+
+create table recebimentos.despesas(
+    recnum int not null,
+    codconta int not null,
+    codfilial int,
+    codigocentrocusto varchar(50),
+    nomeusur varchar(100),
+    numnota int,
+    desccentrocusto varchar(100),
+    historico varchar(200),
+    grupoconta int,
+    vpago money,
+    percrateio numeric(12, 8),
+    constraint despesa_pk primary key (recnum, codconta)
+);
+
+create table recebimentos.devolucao(
+    tborigem varchar(100),
+    codfilial int,
+    codusur int,
+    dtent datetime,
+    codfornec int,
+    fornecedor varchar(200),
+    numnota int,
+    cliente varchar(200),
+    vlfrete money,
+    vldevolucao money,
+    nomeusur varchar(100),
+    descricao varchar(100),
+    motivo varchar(200),
+    motivo2 varchar(200),
+    obs varchar(200)
+);
+
+create table recebimentos.faturamento (
+  numtransitem int not null,
+  dtmov datetime,
+  numnota int,
+  codprod int,
+  codfilial int,
+  codusur int,
+  nomeusur varchar(100),
+  descproduto varchar(100),
+  uf varchar(4),
+  codplpag int,
+  descplpag varchar(100),
+  vlfrete money,
+  percdesc numeric(12, 8),
+  vldesconto money,
+  qt numeric(10, 4),
+  punit money,
+  constraint faturamento_pk primary key (numtransitem)
+);
+
+create table recebimentos.recebimento (
+    numtransvenda int not null,
+    prest int not null,
+    codfilial int,
+    codcli int,
+    cliente varchar(200),
+    codusur int,
+    vendedor varchar(100),
+    duplic int,
+    dtvenc datetime,
+    codcob varchar(10),
+    cobranca varchar(100),
+    valor money,
+    vpago money,
+    dtpagd datetime,
+    dtemissao datetime,
+    constraint recebimento_pk primary key (numtransvenda, prest)
+);
