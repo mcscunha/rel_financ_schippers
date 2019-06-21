@@ -1,0 +1,25 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 30,
+            "database": "eficientesf2",
+            "dialect": "MySQL",
+            "name": "EficienteSF",
+            "password": "eficientesf",
+            "port": 3306,
+            "server": "mysql03.eficientesf.com.br",
+            "username": "eficientesf2"
+        },
+        {
+            "askForPassword": false,
+            "connectionTimeout": 30,
+            "database": "data_warehouse",
+            "dialect": "MSSQL",
+            "name": "Schippers",
+            "password": "consulta",
+            "port": 1433,
+            "server": "schippers.ddns.net",
+            "username": "consulta"
+        }
+    ]
+}

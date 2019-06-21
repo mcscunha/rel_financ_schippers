@@ -57,8 +57,7 @@ from
       and SCHIPPERS.view_devol_resumo_faturamento.codfilial = '1'
   )
 where
-  dtent between '01/03/2019'
-  and '31/03/2019'
+  dtent between '01/03/2019' and '31/03/2019'
   and pcusuari.codusur in (
     34,
     36,
