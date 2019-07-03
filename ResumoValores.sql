@@ -143,8 +143,8 @@ from
   join pccob c on c.codcob = a.codcob
   join pcusuari d on d.codusur = a.codusur 
 where
-  a.codcob not in ('BNF', 'CRED', 'CANC', 'DEVT')
-  and d.codusur not in (1, 27) /* 1=VendaDireta 27=Intercompany */
+  a.codcob not in ('BNF', 'CRED', 'DEVT', 'DEVP', 'ESTR', 'CANC')
+  and a.codusur not in (1, 27)
   and a.codfilial = '1'
   and a.dtpag between '01/05/2019' and '31/05/2019'
 /*
@@ -197,14 +197,37 @@ ORDER BY
     1
 ;
 
-
 -- Verificacao da ultima data inserida E contagem de linhas
-SELECT 'Devolucao', COUNT(*), MAX(A.DTENT)  FROM RECEBIMENTOS.Devolucao A
+-- FILIAL 1
+-- Alguns filtros referentes aos filtros aplicados no Power Query
+  SELECT 'Devolucao', A.CODFILIAL, COUNT(*), MAX(A.DTENT)
+  FROM RECEBIMENTOS.Devolucao A
+  where A.CODfilial = 1
+  group by A.codfilial
 union
-SELECT 'Bonificacao', COUNT(*), MAX(B.DTFAT) FROM Recebimentos.Bonificacao B
+  SELECT 'Bonificacao', B.codfilial, COUNT(*), MAX(B.DTFAT)
+  FROM Recebimentos.Bonificacao B
+  where B.codfilial = 1
+  group by B.codfilial
 union
-SELECT 'Despesas', COUNT(*), max(C.dtcompetencia) FROM Recebimentos.Despesas C
+  SELECT 'Despesas', C.codfilial, COUNT(*), max(C.dtcompetencia)
+  FROM Recebimentos.Despesas C
+  where C.codfilial = 1
+    and C.codigocentrocusto like '1.%'
+  group by C.codfilial
 union
-SELECT 'Recebimento', COUNT(*), MAX(D.DTPAGD) FROM Recebimentos.Recebimento D
+  SELECT 'Recebimento', D.codfilial, COUNT(*), MAX(D.DTPAG), sum(d.vpago)
+  FROM Recebimentos.Recebimento D
+  where D.codfilial = 1
+    and D.codusur not in (1, 27)
+  group by D.codfilial
 union
-SELECT 'Faturamento', COUNT(*), MAX(E.DTFat) FROM Recebimentos.Faturamento E;
+  SELECT 'Faturamento', E.codfilial, COUNT(*), MAX(E.DTFat), sum(E.qt * E.punit)
+  FROM Recebimentos.Faturamento E
+  where E.codfilial = 1
+  group by E.codfilial
+order BY
+	2, 1;
+
+
+
