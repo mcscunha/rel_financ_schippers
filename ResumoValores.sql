@@ -196,3 +196,15 @@ group BY
 ORDER BY
     1
 ;
+
+
+-- Verificacao da ultima data inserida E contagem de linhas
+SELECT 'Devolucao', COUNT(*), MAX(A.DTENT)  FROM RECEBIMENTOS.Devolucao A
+union
+SELECT 'Bonificacao', COUNT(*), MAX(B.DTFAT) FROM Recebimentos.Bonificacao B
+union
+SELECT 'Despesas', COUNT(*), max(C.dtcompetencia) FROM Recebimentos.Despesas C
+union
+SELECT 'Recebimento', COUNT(*), MAX(D.DTPAGD) FROM Recebimentos.Recebimento D
+union
+SELECT 'Faturamento', COUNT(*), MAX(E.DTFat) FROM Recebimentos.Faturamento E;
