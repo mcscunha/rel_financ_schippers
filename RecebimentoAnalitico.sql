@@ -24,7 +24,8 @@ from
   join pccob c on c.codcob = a.codcob
   join pcusuari d on d.codusur = a.codusur 
 where
-  a.codcob not in ('BNF', 'CRED')
+  a.codcob not in ('BNF', 'CRED', 'CANC', 'DEVT')
+  and d.codusur not in (1, 27) /* 1=VendaDireta 27=Intercompany */
   /*
   and a.codfilial = '1'
   and a.dtpag between '01/03/2019' and '31/03/2019'
