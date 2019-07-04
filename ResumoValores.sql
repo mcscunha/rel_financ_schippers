@@ -196,38 +196,3 @@ group BY
 ORDER BY
     1
 ;
-
--- Verificacao da ultima data inserida E contagem de linhas
--- FILIAL 1
--- Alguns filtros referentes aos filtros aplicados no Power Query
-  SELECT 'Devolucao', A.CODFILIAL, COUNT(*), MAX(A.DTENT)
-  FROM RECEBIMENTOS.Devolucao A
-  where A.CODfilial = 1
-  group by A.codfilial
-union
-  SELECT 'Bonificacao', B.codfilial, COUNT(*), MAX(B.DTFAT)
-  FROM Recebimentos.Bonificacao B
-  where B.codfilial = 1
-  group by B.codfilial
-union
-  SELECT 'Despesas', C.codfilial, COUNT(*), max(C.dtcompetencia)
-  FROM Recebimentos.Despesas C
-  where C.codfilial = 1
-    and C.codigocentrocusto like '1.%'
-  group by C.codfilial
-union
-  SELECT 'Recebimento', D.codfilial, COUNT(*), MAX(D.DTPAG), sum(d.vpago)
-  FROM Recebimentos.Recebimento D
-  where D.codfilial = 1
-    and D.codusur not in (1, 27)
-  group by D.codfilial
-union
-  SELECT 'Faturamento', E.codfilial, COUNT(*), MAX(E.DTFat), sum(E.qt * E.punit)
-  FROM Recebimentos.Faturamento E
-  where E.codfilial = 1
-  group by E.codfilial
-order BY
-	2, 1;
-
-
-
